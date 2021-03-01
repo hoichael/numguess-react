@@ -158,6 +158,18 @@ body {
   -webkit-text-stroke: 1px black;
 }
 
+@-moz-document url-prefix() { 
+  .guess-submit {
+    height: 198px;
+    position: absolute;
+    top: 53%;
+  }
+
+  .result-number-final-fail, .result-number-final-succ {
+    -webkit-text-stroke: 8px black;
+  }
+}
+
 .result-footer, .reset-button {
   text-align: center;
   margin-top: 0px;
