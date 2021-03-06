@@ -74,10 +74,10 @@ const Result = ( { guess, rangeStart, rangeEnd, reset } ) => {
     return (
         <div className="result-div">
             <h1 className="result-header">THE GENERATED NUMBER IS...</h1>
-            <h2 className={resultNumberClass}>{finalNumberState ? finalNumberState : fauxNumberState}</h2>
-            <h1 className="result-footer">{finalNumberState && (finalNumberState == guess ? "Success!" : "Failure.")}
+            <h2 className={resultNumberClass}>{finalNumberState !== undefined ? finalNumberState : fauxNumberState}</h2>
+            <h1 className="result-footer">{finalNumberState !== undefined && (finalNumberState == guess ? "Success!" : "Failure.")}
             <br></br>
-            {finalNumberState && <button className="reset-button" onClick={reset}>M E N U</button>}
+            {finalNumberState !== undefined && <button className="reset-button" onClick={reset}>M E N U</button>}
             </h1>
         </div>
     )
