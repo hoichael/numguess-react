@@ -1,4 +1,4 @@
-import {useRef, useEffect, useState} from "react"
+import {useRef, useEffect} from "react"
 
 const Numbers = ( { layer } ) => {
 
@@ -6,13 +6,13 @@ const Numbers = ( { layer } ) => {
 
     let ArrNumbers = [];
 
-    let canvas;
+  //  let canvas;
 
-    let ctx;
+ //   let ctx;
 
     let isForeground = false;
 
-    function Number(character, spawnDelay, positionX, size, speed) {
+    function BackgroundNumber(character, spawnDelay, positionX, size, speed) {
         this.character = character;
         this.spawnDelay = spawnDelay;
         this.positionY = 0;
@@ -35,7 +35,7 @@ const Numbers = ( { layer } ) => {
                 const size = Math.floor(Math.random() * 148) + 92
     
                 ArrNumbers.push(
-                    new Number(
+                    new BackgroundNumber(
                         Math.floor(Math.random() * 9),
                         Math.floor(Math.random() * 100) + 40,
                         Math.floor(Math.random() * window.innerWidth) + 64,
@@ -51,7 +51,7 @@ const Numbers = ( { layer } ) => {
                 const size = Math.floor(Math.random() * 74) + 8
     
                 ArrNumbers.push(
-                    new Number(
+                    new BackgroundNumber(
                         Math.floor(Math.random() * 9),
                         Math.floor(Math.random() * 40) + 1,
                         Math.floor(Math.random() * window.innerWidth) + 64,
@@ -64,7 +64,7 @@ const Numbers = ( { layer } ) => {
     }
 
 
-    function draw(element) {
+    function draw(element, ctx) {
 
       if(element.spawnDelay <= 0) {
           if(element.positionY < window.innerHeight + 128) {
@@ -93,16 +93,16 @@ const Numbers = ( { layer } ) => {
     }
 
     useEffect(() => {
-        canvas = canvasRef.current;
-        canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight;
-        ctx = canvas.getContext("2d");
+    //    canvas = canvasRef.current;
+        canvasRef.current.width = window.innerWidth;
+        canvasRef.current.height = window.innerHeight;
+        const ctx = canvasRef.current.getContext("2d");
 
         init();
 
         const interval = setInterval(() => {
             ctx.clearRect(0, 0, window.innerWidth, window.innerHeight);
-            ArrNumbers.forEach(draw);
+            ArrNumbers.forEach((function (num) { draw(num, ctx) }));
         }, 5); 
 
         return () => clearInterval(interval);

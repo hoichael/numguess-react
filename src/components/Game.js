@@ -24,6 +24,9 @@ const Game = ( { id, difficulty, reset} ) => {
                 setRangeStart(1);
                 setRangeEnd(10);
                 break;
+            default: {
+                console.log("default yo");
+            }    
         }
 
     }
